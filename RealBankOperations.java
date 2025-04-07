@@ -65,6 +65,7 @@ public class RealBankOperations implements BankOperations {
 
     @Override
     public void MakeTransaction(Integer senderID, Integer receiverID, int sum) throws IOException{
+        if(sum<0) throw new IllegalArgumentException("Sum must be greater than 0");
         File tempFile = new File("temp_clients.txt"),
                 inputFile = new File("clients.txt");
         if(senderID.equals(receiverID)) throw new IllegalArgumentException("sender and receiver are the same person");
@@ -112,6 +113,7 @@ public class RealBankOperations implements BankOperations {
 
     @Override
     public void WithdrawMoney(Integer id, int sum) throws IOException{
+        if (sum<=0) throw new IllegalArgumentException("Sum must be greater than 0");
         File tempFile = new File("temp_clients.txt"),
                 inputFile = new File("clients.txt");
         try (RandomAccessFile clientsReader = new RandomAccessFile(inputFile, "r");
@@ -149,6 +151,7 @@ public class RealBankOperations implements BankOperations {
 
     @Override
     public void DepositMoney(Integer id, int sum) throws IOException{
+        if (sum<=0) throw new IllegalArgumentException("Sum must be greater than 0");
         File tempFile = new File("temp_clients.txt"),
                 inputFile = new File("clients.txt");
         try (RandomAccessFile clientsReader = new RandomAccessFile(inputFile, "r");
